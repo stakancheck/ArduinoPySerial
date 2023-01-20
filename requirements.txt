@@ -1,0 +1,6 @@
+matplotlib~=3.6.2
+customtkinter~=5.0.3
+numpy~=1.23.4
+aiofiles~=22.1.0
+pyserial~=3.5
+pyserial-asyncio~=0.6
