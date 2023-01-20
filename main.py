@@ -14,10 +14,11 @@ import logging
 import serial
 import glob
 import sys
+import os
 
 
 logging.basicConfig(level=logging.INFO)
-customtkinter.set_appearance_mode("System")
+customtkinter.set_appearance_mode('System')
 style.use('ggplot')
 
 config = ConfigParser()
@@ -292,21 +293,29 @@ def serial_ports():
     return result
 
 
+def get_icon():
+    current_path = os.getcwd()
+    if sys.platform == 'linux':
+        path_n_file = current_path + "/assets/icon.png"
+    elif os.name == 'win':
+        path_n_file = current_path + "\\assets\\icon.png"
+    else:
+        raise Exception("Unknown system")
+    print(path_n_file)
+    return path_n_file
+
+
 def main():
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
-
-    customtkinter.set_appearance_mode("System")
-    customtkinter.set_default_color_theme("blue")
-
-    Window(loop)
+    app = Window(loop)
+    app.wm_iconphoto(True, tk.PhotoImage(file=get_icon()))
     loop.run_forever()
     loop.close()
 
 
 if __name__ == '__main__':
     main()
-
 
 
 
